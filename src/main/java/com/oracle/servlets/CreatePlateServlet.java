@@ -39,16 +39,18 @@ public class CreatePlateServlet extends HttpServlet {
       return;
     }
 
-    String number = request.getParameter("number");
+    String plateNumber = request.getParameter("plateNumber");
     String state = request.getParameter("state");
     String owner = request.getParameter("owner");
     String address = request.getParameter("address");
+    String imageURL = request.getParameter("imageURL");
 
     Plate plate = new Plate();
-    plate.setNumber(number);
+    plate.setPlateNumber(plateNumber);
     plate.setState(state);
     plate.setOwner(owner);
     plate.setAddress(address);
+    plate.setImageURL(imageURL);
 
     plateService.addPlate(plate);
     request.setAttribute("message", "Plate created");

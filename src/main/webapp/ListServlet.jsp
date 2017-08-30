@@ -22,22 +22,26 @@
           <td>State</td>
           <td>Owner</td>
           <td>Address</td>
+          <td>Image URL</td>
         </tr>
       </thead>
       <tbody>
         <c:forEach var="plate" items="${allPlates}">
           <tr>
             <td>
-              ${plate.number}
+              ${plate.plateNumber}
             </td>
             <td>
               ${plate.state}
             </td>
             <td>
-              $<plate.owner}
+              ${plate.owner}
             </td>
             <td>
               ${plate.address}
+            </td>
+            <td>
+              ${plate.imageURL}
             </td>
           </tr>
         </c:forEach>

@@ -44,7 +44,7 @@ public class LicensePlateServiceImpl implements LicensePlateService {
 
   @SuppressWarnings("unchecked")
   public List<Plate> getAllPlates() {
-    Query query = em.createQuery("Select a FROM plates a");
+    Query query = em.createQuery("Select a FROM Plate a");
     return query.getResultList();
   }
 

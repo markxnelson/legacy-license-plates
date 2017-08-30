@@ -16,7 +16,7 @@
       <table>
         <tr>
           <td>Plate number:</td>
-          <td><input type="text" name="number"></td>
+          <td><input type="text" name="plateNumber"></td>
         </tr>
         <tr>
           <td>State:</td>
@@ -29,6 +29,10 @@
         <tr>
           <td>Owner address:</td>
           <td><input type="text" name="address" ></td>
+        </tr>
+        <tr>
+          <td>Image URL:</td>
+          <td><input type="text" name="imageURL" ></td>
         </tr>
         <tr>
           <td>&nbsp;</td>

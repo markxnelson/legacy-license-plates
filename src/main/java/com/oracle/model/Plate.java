@@ -11,17 +11,10 @@
 package com.oracle.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Version;
 
@@ -35,38 +28,22 @@ public class Plate implements Serializable {
   @Id
   private int plateId;
   private String state;
-  private String number;
+  private String plateNumber;
   private String owner;
   private String address;
-
-  @Version
-  private int version;
+  private String imageURL;
 
   public Plate() {
   }
 
-  public Plate(int plateId, String state, String number, String owner, String address) {
+  public Plate(int plateId, String state, String plateNumber, String owner, String address, String imageURL) {
     this.plateId = plateId;
     this.state = state;
-    this.number = number;
+    this.plateNumber = plateNumber;
     this.owner = owner;
     this.address = address;
+    this.imageURL = imageURL;
   }
-
-//  public Auction withValues(float currPrice, float increment, AuctionStatus status) {
-//    this.currPrice = currPrice;
-//    this.bidIncrement = increment;
-//    this.status = status;
-//    return this;
-//  }
-//
-//  public Auction withItemValues(String title, String description, ItemCondition condition, int imageId) {
-//    this.description = description;
-//    this.condition = condition;
-//    this.imageId = imageId;
-//    this.title = title;
-//    return this;
-//  }
 
   public int getPlateId() {
     return plateId;
@@ -84,12 +61,12 @@ public class Plate implements Serializable {
     this.state = state;
   }
 
-  public String getNumber() {
-    return number;
+  public String getPlateNumber() {
+    return plateNumber;
   }
 
-  public void setNumber(String number) {
-    this.number = number;
+  public void setPlateNumber(String plateNumber) {
+    this.plateNumber = plateNumber;
   }
 
   public String getOwner() {
@@ -108,12 +85,13 @@ public class Plate implements Serializable {
     this.address = address;
   }
 
-  public int getVersion() {
-    return version;
+  public String getImageURL() {
+    return imageURL;
   }
 
-  public void setVersion(int version) {
-    this.version = version;
+  public void setImageURL(String imageURL) {
+    this.imageURL = imageURL;
   }
+
 
 }

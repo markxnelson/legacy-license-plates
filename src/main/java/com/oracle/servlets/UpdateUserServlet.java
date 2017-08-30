@@ -24,7 +24,7 @@ public class UpdateUserServlet extends HttpServlet {
   
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
-    request.getSession().setAttribute("auctionUser", request.getParameter("user"));
+    request.getSession().setAttribute("plateUser", request.getParameter("user"));
     request.getRequestDispatcher("/index.jsp").forward(request, response);
   }
 

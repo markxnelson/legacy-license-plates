@@ -10,44 +10,48 @@
 
 package com.oracle.servlets;
 
-import com.oracle.services.AuctionService;
+import com.oracle.model.Plate;
+import com.oracle.services.LicensePlateService;
 
 import java.io.IOException;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "BidServlet", urlPatterns = {"/BidServlet"})
-public class BidServlet extends HttpServlet {
+@WebServlet(name = "CreatePlateServlet", urlPatterns = {"/CreatePlateServlet"})
+@MultipartConfig
+public class CreatePlateServlet extends HttpServlet {
 
   private static final long serialVersionUID = 1L;
-  
+
   @Inject
-  private AuctionService auctionService;
+  private LicensePlateService plateService;
 
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    String auctionUser = (String) request.getSession().getAttribute("auctionUser");
-    if (auctionUser == null) {
+    String plateUser = (String) request.getSession().getAttribute("plateUser");
+    if (plateUser == null) {
       response.sendError(HttpServletResponse.SC_FORBIDDEN);
       return;
     }
-    if (request.getParameter("id") == null) {
-      response.sendRedirect(getServletContext().getContextPath() + "/ListServlet");
-      return;
-    }
 
-    int auctionId = Integer.parseInt(request.getParameter("id"));
-    float bidAmount = Float.parseFloat(request.getParameter("bidAmount"));
-    if (request.authenticate(response) && request.isUserInRole("user")) {
-      String result = auctionService.bid(auctionId, auctionUser, bidAmount);
-      request.setAttribute("message", result);
-    } else {
-      request.setAttribute("message", "User not authorized.");
-    }
-    request.getRequestDispatcher("/DetailServlet").forward(request, response);
+    String number = request.getParameter("number");
+    String state = request.getParameter("state");
+    String owner = request.getParameter("owner");
+    String address = request.getParameter("address");
+
+    Plate plate = new Plate();
+    plate.setNumber(number);
+    plate.setState(state);
+    plate.setOwner(owner);
+    plate.setAddress(address);
+
+    plateService.addPlate(plate);
+    request.setAttribute("message", "Plate created");
+    request.getRequestDispatcher("/ListServlet").forward(request, response);
   }
 }

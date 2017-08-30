@@ -10,7 +10,7 @@
 
 package com.oracle.servlets;
 
-import com.oracle.services.AuctionService;
+import com.oracle.services.LicensePlateService;
 
 import java.io.IOException;
 import javax.inject.Inject;
@@ -26,13 +26,13 @@ public class DetailServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
   
   @Inject
-  private AuctionService auctionService;
+  private LicensePlateService plateService;
 
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     int id = Integer.parseInt(request.getParameter("id"));
-    request.setAttribute("auction", auctionService.findAuctionById(id));
+    request.setAttribute("late", plateService.findPlateById(id));
     request.getRequestDispatcher("/DetailServlet.jsp").forward(request, response);
   }
 

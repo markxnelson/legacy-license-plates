@@ -10,13 +10,10 @@
 
 package com.oracle.servlets;
 
-import com.oracle.model.Auction;
-import com.oracle.model.Bid;
-import com.oracle.model.Image;
-import com.oracle.sampleData.AuctionData;
+import com.oracle.model.Plate;
+import com.oracle.sampleData.PlateData;
 import com.oracle.sampleData.PlateDataSet;
-import com.oracle.services.AuctionService;
-import com.oracle.services.ImageService;
+import com.oracle.services.LicensePlateService;
 
 import java.io.IOException;
 import javax.inject.Inject;
@@ -32,26 +29,14 @@ public class SetupServlet extends HttpServlet {
   private static final long serialVersionUID = 1L;
   
   @Inject
-  private AuctionService auctionService;
-  @Inject
-  private ImageService imageService;
+  private LicensePlateService plateService;
 
   protected void processRequest(HttpServletRequest request, HttpServletResponse response)
           throws ServletException, IOException {
     PlateDataSet dataSet = new PlateDataSet();
-    //for (AuctionData data : dataSet.getDataList()) {
-    //	System.out.println("DEBUG: AuctionDataSet = " + data.getAuction().toString());
-    //}
-    for (AuctionData data : dataSet.getDataList()) {
-      if (data.getImage() != null) {
-        Image savedImage = imageService.addImage(data.getImage());
-        data.setImage(savedImage);
-      }
-      Auction savedAuction = auctionService.addAuction(data.getAuction());
-      data.setAuction(savedAuction);
-      for (Bid bid : data.getBids()) {
-        auctionService.bid(data.getAuction().getAuctionId(), bid.getBidder(), bid.getAmount());
-      }
+    for (PlateData data : dataSet.getDataList()) {
+      Plate savedPlate = plateService.addPlate(data.getPlate());
+      data.setPlate(savedPlate);
     }
     request.getRequestDispatcher("/setupComplete.jsp").forward(request, response);
   }

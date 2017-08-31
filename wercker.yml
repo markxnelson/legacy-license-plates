@@ -12,5 +12,5 @@ build:
         name: echo
         code: |
           echo "hello from echo step"
-    - markxnelson/weblogic-step@0.1.2:
+    - markxnelson/weblogic-step@0.1.3:
         config: test_data

@@ -4,7 +4,7 @@ package com.oracle.rest;
 // -- DISCLAIMER:
 // --    This code is provided for educational purposes only. It is NOT
 // --    supported by Oracle World Wide Technical Support.
-// --    The script has been tested and appears to work as intended.
+// --    The code has been tested and appears to work as intended.
 // --    You should always run new scripts on a test instance initially.
 // --
 // ------------------------------------------------------------------------
@@ -42,7 +42,7 @@ public class LicensePlateRestService {
                 plateService.addPlate(plate);
             }
         }
-        
+
         return plateService.getAllPlates();
     }
 

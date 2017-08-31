@@ -1,0 +1,16 @@
+# Copyright 2017, Oracle Corporation and/or affiliates.  All rights reserved.
+
+box: 
+  id: quay.io/markxnelson/weblogic
+  username: $QUAY_IO_USERNAME
+  password: $QUAY_IO_PASSWORD
+  tag: latest
+
+build:
+  steps:
+    - script:
+        name: echo
+        code: |
+          echo "hello from echo step"
+    - markxnelson/weblogic-step@0.1.2:
+        config: test_data

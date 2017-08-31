@@ -52,4 +52,10 @@ public class LicensePlateRestService {
         return plateService.findPlateById(Integer.parseInt(id));
     }
 
+    @GET
+    @Path("get-latest")
+    public Plate getLatestPlate() {
+        List<Plate> plates = plateService.getAllPlates();
+        return plates.get(plates.size()-1);
+    }
 }

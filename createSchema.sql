@@ -1,8 +1,10 @@
 
 DROP TABLE Plate;
 
+create sequence plateid_sequence start with 1 increment by 1 nocache;
+
 CREATE TABLE Plate (
-    PlateID INTEGER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) primary key ,
+    PlateID INTEGER primary key ,
     State CHAR(2),
     PlateNumber VARCHAR(10),
     Owner VARCHAR(100),

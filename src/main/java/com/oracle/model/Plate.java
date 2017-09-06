@@ -23,6 +23,8 @@ public class Plate implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
+  @SequenceGenerator(name="plate_sequence", sequenceName="plateid_sequence", allocationSize=1)
+  @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="plate_sequence")
   @Id
   private int plateId;
   private String state;

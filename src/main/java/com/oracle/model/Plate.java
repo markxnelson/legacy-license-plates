@@ -23,7 +23,6 @@ public class Plate implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
-  @GeneratedValue(strategy=GenerationType.IDENTITY)
   @Id
   private int plateId;
   private String state;

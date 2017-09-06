@@ -40,7 +40,7 @@ dev:
       echo "Check for Maven repo access"      
       status="$(curl --max-time 5 -Is https://repo.maven.apache.org | head -1)"
       validate=( $status )
-      if [ ${validate[1]} == "200" ]; then
+      if [ "${validate[1]}" == "200" ]; then
         cd $WERCKER_SOURCE_DIR
         mvn clean install
         cp target/licenseplates.war /u01/oracle/.

@@ -65,7 +65,7 @@ dev:
       ./ds-wlst-online-config.sh
       wlst /u01/oracle/app-deploy-online.py    
   - internal/watch:
-     name: "Let it run!"
+     name: "Run it!"
      code: |
       echo "App is ready for use"
      

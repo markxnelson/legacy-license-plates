@@ -12,6 +12,8 @@ box:
   username: $QUAY_USERNAME
   password: $QUAY_PASSWORD
   tag: latest
+  ports:
+   - "7001"
  
 dev:
  steps:
@@ -21,7 +23,7 @@ dev:
       # Wait for 1521 to open
       while ! nc $DATABASE_PORT_1521_TCP_ADDR $DATABASE_PORT_1521_TCP_PORT < /dev/null; do sleep 3; done
       # sleep for some extra time for db setup
-      sleep 100
+      sleep 80
   - script: 
      name: "Create Tables" 
      code: |       
@@ -34,10 +36,11 @@ dev:
       echo "Done creating table"
   - script: 
      name: "Create Application war" 
-     code: |       
-      status="$(curl -Is https://repo.maven.apache.org | head -1)"
-      validate=( $stats )
-      if [ ${validate[-2]} == "200" ]; then
+     code: | 
+      echo "Check for Maven repo access"      
+      status="$(curl --max-time 5 -Is https://repo.maven.apache.org | head -1)"
+      validate=( $status )
+      if [ ${validate[1]} == "200" ]; then
         cd $WERCKER_SOURCE_DIR
         mvn clean install
         cp target/licenseplates.war /u01/oracle/.
@@ -56,8 +59,13 @@ dev:
       export DATABASE_DS_URL="jdbc:oracle:thin:@//$DATABASE_PORT_1521_TCP_ADDR:$DATABASE_PORT_1521_TCP_PORT/$DATABASE_ENV_DB_SID.$DATABASE_ENV_DB_DOMAIN"
       cp -R container-scripts/*  /u01/oracle/.
       chmod +xr /u01/oracle/*.sh
+      chmod +xr /u01/oracle/*.py
+      chmod +xr /u01/oracle/wlst 
       cd /u01/oracle
       ./ds-wlst-online-config.sh
-      wlst /u01/oracle/app-deploy.py    
-  - internal/shell:
-     cmd: /bin/bash
+      wlst /u01/oracle/app-deploy-online.py    
+  - internal/watch:
+     name: "Let it run!"
+     code: |
+      echo "App is ready for use"
+     

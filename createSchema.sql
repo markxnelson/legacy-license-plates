@@ -1,10 +1,8 @@
 
 DROP TABLE Plate;
 
-create sequence plateid_sequence start with 1;
-
 CREATE TABLE Plate (
-    PlateID INTEGER primary key DEFAULT plateid_sequence.NEXTVAL,
+    PlateID INTEGER GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1) primary key ,
     State CHAR(2),
     PlateNumber VARCHAR(10),
     Owner VARCHAR(100),

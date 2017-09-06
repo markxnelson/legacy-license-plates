@@ -35,11 +35,15 @@ dev:
   - script: 
      name: "Create Application war" 
      code: |       
-      export http_proxy=http://www-proxy.us.oracle.com:80
-      export https_proxy=https://www-proxy.us.oracle.com:80
-      cd $WERCKER_SOURCE_DIR
-      mvn clean install
-      cp target/licenseplates.war /u01/oracle/.
+      status="$(curl -Is https://repo.maven.apache.org | head -1)"
+      validate=( $stats )
+      if [ ${validate[-2]} == "200" ]; then
+        cd $WERCKER_SOURCE_DIR
+        mvn clean install
+        cp target/licenseplates.war /u01/oracle/.
+      else
+        echo "No internet access.Will use the prebuilt war"
+      fi     
   - script: 
      name: "Create Domain and Deploy App" 
      code: |       

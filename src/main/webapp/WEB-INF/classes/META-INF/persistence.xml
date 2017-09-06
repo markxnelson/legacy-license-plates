@@ -13,7 +13,7 @@
   <persistence-unit name="PlatePU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
 <!--    <jta-data-source>java:comp/DefaultDataSource</jta-data-source>  -->
-    <jta-data-source>jdbc/mark</jta-data-source>
+    <jta-data-source>jdbc/licenseplates</jta-data-source>
     <class>com.oracle.model.Plate</class>
     <properties>
     </properties>

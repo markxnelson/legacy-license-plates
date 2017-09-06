@@ -1,16 +1,59 @@
 # Copyright 2017, Oracle Corporation and/or affiliates.  All rights reserved.
 
-box: 
-  id: quay.io/markxnelson/weblogic
-  username: $QUAY_IO_USERNAME
-  password: $QUAY_IO_PASSWORD
-  tag: latest
+services:
+  - name: database 
+    id: quay.io/ravi_r_singhal/database
+    username: $QUAY_USERNAME
+    password: $QUAY_PASSWORD
+    tag: latest
 
-build:
-  steps:
-    - script:
-        name: echo
-        code: |
-          echo "hello from echo step"
-    - markxnelson/weblogic-step@0.1.3:
-        config: test_data
+box:
+  id: quay.io/ravi_r_singhal/weblogic
+  username: $QUAY_USERNAME
+  password: $QUAY_PASSWORD
+  tag: latest
+ 
+dev:
+ steps:
+  - script: 
+     name: "Wait for DB connection" 
+     code: | 
+      # Wait for 1521 to open
+      while ! nc $DATABASE_PORT_1521_TCP_ADDR $DATABASE_PORT_1521_TCP_PORT < /dev/null; do sleep 3; done
+      # sleep for some extra time for db setup
+      sleep 100
+  - script: 
+     name: "Create Tables" 
+     code: |       
+      export LD_LIBRARY_PATH=/usr/lib/oracle/12.2/client64/lib
+      ls -lahrt
+      export SQL_PLUS_CMD="sqlplus64 -S sys/$DATABASE_ENV_DB_PASSWD@$DATABASE_PORT_1521_TCP_ADDR:$DATABASE_PORT_1521_TCP_PORT/$DATABASE_ENV_DB_SID.$DATABASE_ENV_DB_DOMAIN as sysdba @createSchema.sql"
+      #/bin/bash
+      echo $SQL_PLUS_CMD
+      eval $SQL_PLUS_CMD
+      echo "Done creating table"
+  - script: 
+     name: "Create Application war" 
+     code: |       
+      export http_proxy=http://www-proxy.us.oracle.com:80
+      export https_proxy=https://www-proxy.us.oracle.com:80
+      cd $WERCKER_SOURCE_DIR
+      mvn clean install
+      cp target/licenseplates.war /u01/oracle/.
+  - script: 
+     name: "Create Domain and Deploy App" 
+     code: |       
+      export MW_HOME="$ORACLE_HOME" 
+      export DOMAIN_HOME=/u01/oracle/user_projects/domains/base_domain
+      export PATH=$PATH:/u01/oracle:$DOMAIN_HOME
+      export APP_NAME="licenseplates"
+      export APP_PKG_FILE="licenseplates.war"
+      export APP_PKG_LOCATION="/u01/oracle"
+      export DATABASE_DS_URL="jdbc:oracle:thin:@//$DATABASE_PORT_1521_TCP_ADDR:$DATABASE_PORT_1521_TCP_PORT/$DATABASE_ENV_DB_SID.$DATABASE_ENV_DB_DOMAIN"
+      cp -R container-scripts/*  /u01/oracle/.
+      chmod +xr /u01/oracle/*.sh
+      cd /u01/oracle
+      ./ds-wlst-online-config.sh
+      wlst /u01/oracle/app-deploy.py    
+  - internal/shell:
+     cmd: /bin/bash

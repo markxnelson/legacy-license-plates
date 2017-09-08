@@ -24,4 +24,6 @@ public interface LicensePlateService {
 
   Plate updatePlate(Plate auction);
 
+  void deleteAllPlates();
+
 }

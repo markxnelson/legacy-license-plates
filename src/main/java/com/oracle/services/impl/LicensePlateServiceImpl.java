@@ -84,4 +84,18 @@ public class LicensePlateServiceImpl implements LicensePlateService {
     }
   }
 
+  public void deleteAllPlates() {
+    try {
+      utx.begin();
+      List<Plate> plates = getAllPlates();
+      for(Plate plate : plates) {
+        em.remove(plate);
+      }
+      utx.commit();
+    } catch (Exception ex) {
+      Logger.getLogger(LicensePlateServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+      throw new RuntimeException(ex);
+    }
+  }
+
 }

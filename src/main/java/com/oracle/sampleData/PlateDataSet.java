@@ -23,7 +23,7 @@ public class PlateDataSet {
     dataList.add(
             new PlateData()
             .setPlate(
-            new Plate(1, "NJ", "ABC123", "John Doe", "25 Main Road, Smalltown, NJ 07011", "http://some.place/image1.jpeg")));
+            new Plate("NJ", "ABC123", "John Doe", "25 Main Road, Smalltown, NJ 07011", "http://some.place/image1.jpeg")));
   }
 
   public List<PlateData> getDataList() {

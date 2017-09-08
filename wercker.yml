@@ -2,9 +2,9 @@
 
 services:
   - name: database 
-    id: quay.io/ravi_r_singhal/database
-    username: $QUAY_USERNAME
-    password: $QUAY_PASSWORD
+    id: container-registry.oracle.com/database/enterprise
+    username: $OCR_USERNAME
+    password: $OCR_PASSWORD
     tag: latest
 
 box:
@@ -69,3 +69,11 @@ dev:
      code: |
       echo "App is ready for use"
      
+  - internal/docker-push:
+     username: $QUAY_USERNAME
+     password: $QUAY_PASSWORD
+     tag: demo-ready
+     repository: quay.io/ravi_r_singhal/weblogic
+     registry: https://quay.io
+     cmd: /u01/oracle/user_projects/domains/base_domain/startWebLogic.sh
+     ports: 7001 

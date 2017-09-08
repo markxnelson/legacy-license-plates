@@ -36,6 +36,17 @@ public class LicensePlateRestService {
     @POST
     @Consumes("application/json")
     @Path("/add")
+    public List<Plate> addPlate(Plate newPlate) {
+        if (newPlate != null) {
+            plateService.addPlate(newPlate);
+        }
+
+        return plateService.getAllPlates();
+    }
+
+    @POST
+    @Consumes("application/json")
+    @Path("/add-all")
     public List<Plate> addPlate(Collection<Plate> newPlates) {
         if (newPlates != null && !newPlates.isEmpty()) {
             for (Plate plate : newPlates) {
@@ -57,5 +68,12 @@ public class LicensePlateRestService {
     public Plate getLatestPlate() {
         List<Plate> plates = plateService.getAllPlates();
         return plates.get(plates.size()-1);
+    }
+
+    @GET
+    @Path("delete-all")
+    public List<Plate> deleteAllPlates() {
+        plateService.deleteAllPlates();
+        return plateService.getAllPlates();
     }
 }

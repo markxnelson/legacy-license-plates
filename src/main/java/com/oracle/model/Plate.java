@@ -36,8 +36,7 @@ public class Plate implements Serializable {
   public Plate() {
   }
 
-  public Plate(int plateId, String state, String plateNumber, String owner, String address, String imageURL) {
-    this.plateId = plateId;
+  public Plate(String state, String plateNumber, String owner, String address, String imageURL) {
     this.state = state;
     this.plateNumber = plateNumber;
     this.owner = owner;

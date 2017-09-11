@@ -1,0 +1,17 @@
+{
+  "deployments": [
+    {
+      "name": "licenseplates",
+      "source": "/u01/oracle/licenseplates.war"
+    }
+  ],
+  "datasources": [
+    {
+      "name": "licenseplates",
+      "jndiName": "jdbc/licenseplates",
+      "url": "database:1521/OraDoc.my.domain.com",
+      "user": "c##mark",
+      "password": "Welcome1"
+    }
+  ]
+}

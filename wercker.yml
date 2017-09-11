@@ -4,13 +4,15 @@ box:
   id: quay.io/markxnelson/weblogic
   username: $QUAY_IO_USERNAME
   password: $QUAY_IO_PASSWORD
-  tag: latest
+  tag: 12.2.1.2
+  entrypoint: /u01/oracle/createEmptyDomain.sh
 
-build:
+dev:
   steps:
     - script:
         name: echo
         code: |
           echo "hello from echo step"
-    - markxnelson/weblogic-step@0.1.3:
-        config: test_data
+          echo "by now a domain should have been created"
+    - markxnelson/weblogic-step@0.1.4:
+        config: weblogic-config.json

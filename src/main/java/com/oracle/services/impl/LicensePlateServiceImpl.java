@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
+import javax.persistence.Parameter;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.transaction.UserTransaction;
@@ -98,4 +99,14 @@ public class LicensePlateServiceImpl implements LicensePlateService {
     }
   }
 
+  public List<Plate> findPlate(String requestedPlateNumber) {
+    List<Plate> plates = null;
+    try {
+      Query query = em.createQuery("Select a FROM Plate a where a.plateNumber like :requestedPlateNumber").setParameter("requestedPlateNumber", requestedPlateNumber);
+      plates = query.getResultList();
+    } catch (Exception e) {
+      LOG.log(Level.SEVERE, e.getMessage());
+    }
+    return plates;
+  }
 }

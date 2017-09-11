@@ -1,3 +1,5 @@
+<%@ page import="java.net.UnknownHostException" %>
+<%@ page import="java.net.InetAddress" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,5 +26,23 @@
 
     <p>This project requires a database.</p>
 
+    <%
+      String hostname, serverAddress;
+      hostname = "error";
+      serverAddress = "error";
+      try {
+        InetAddress inetAddress;
+        inetAddress = InetAddress.getLocalHost();
+        hostname = inetAddress.getHostName();
+        serverAddress = inetAddress.toString();
+      } catch (UnknownHostException e) {
+
+        e.printStackTrace();
+      }
+    %>
+
+    <li>InetAddress: <%=serverAddress %>
+    <li>InetAddress.hostname: <%=hostname %>
+      
   </body>
 </html>

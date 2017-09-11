@@ -26,4 +26,6 @@ public interface LicensePlateService {
 
   void deleteAllPlates();
 
+  List<Plate> findPlate(String requestedPlateNumber);
+
 }

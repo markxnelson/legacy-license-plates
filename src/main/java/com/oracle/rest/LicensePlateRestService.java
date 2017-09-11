@@ -76,4 +76,10 @@ public class LicensePlateRestService {
         plateService.deleteAllPlates();
         return plateService.getAllPlates();
     }
+
+    @GET
+    @Path("get-by-plate-number/{plate-number}")
+    public List<Plate> getPlateByPlateNumber(@PathParam("plate-number") String requestedPlateNumber) {
+        return plateService.findPlate(requestedPlateNumber);
+    }
 }

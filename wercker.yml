@@ -7,7 +7,7 @@ box:
   tag: 12.2.1.2
   entrypoint: /u01/oracle/createEmptyDomain.sh
 
-dev:
+build:
   steps:
     - script:
         name: echo

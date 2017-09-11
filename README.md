@@ -152,7 +152,8 @@ REST endpoints are as follows:
 ```
 * POST http://localhost:7001/licenseplates/rest/plates/add-all  with Content-Type=Application/json and body:
 ```
-[{"address":"NYC","imageURL":"http://google.com/","owner":"John Adams","plateNumber":"ABCDEF","state":"NY"}]
+[{"address":"NYC","imageURL":"http://google.com/","owner":"John Adams","plateNumber":"ABCDEF","state":"NY"},
+{"address":"Blue Ridge Mountains","imageURL":"http://google.com/","owner":"Thomas Jefferson","plateNumber":"ZYX-321","state":"VA"}]
 ```
 * GET http://localhost:7001/licenseplates/rest/plates/delete-all
 

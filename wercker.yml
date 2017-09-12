@@ -13,15 +13,15 @@ build:
         code: |
           echo "hello from echo step"
           echo "by now a domain should have been created"
-    - markxnelson/weblogic-step@0.1.17:
+    - markxnelson/weblogic-step@0.1.19:
         config: weblogic-config.json
     - internal/docker-push:
         username: $QUAY_IO_USERNAME
         password: $QUAY_IO_PASSWORD
-        repository: quay.io
+        repository: quay.io/markxnelson/weblogic
         tag: licenseplates
         ports: "7001"
-        entrypoint: "/u01/oracle/domains/base_domain/startWebLogic.sh"
+        entrypoint: "/u01/oracle/entrypoint.sh"
 
 dev:
   steps:

@@ -13,7 +13,7 @@ build:
         code: |
           echo "hello from echo step"
           echo "by now a domain should have been created"
-    - markxnelson/weblogic-step@0.1.15:
+    - markxnelson/weblogic-step@0.1.17:
         config: weblogic-config.json
     - internal/docker-push:
         username: $QUAY_IO_USERNAME
@@ -25,6 +25,6 @@ build:
 
 dev:
   steps:
-    - markxnelson/weblogic-step@0.1.15:
-        config: weblogic-config.json
+#    - markxnelson/weblogic-step@0.1.15:
+#        config: weblogic-config.json
     - internal/shell

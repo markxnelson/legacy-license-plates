@@ -32,6 +32,7 @@ public class Plate implements Serializable {
   private String owner;
   private String address;
   private String imageURL;
+  private String ts;
 
   public Plate() {
   }
@@ -90,6 +91,14 @@ public class Plate implements Serializable {
 
   public void setImageURL(String imageURL) {
     this.imageURL = imageURL;
+  }
+
+  public String getTs() {
+    return ts;
+  }
+
+  public void setTs(String ts) {
+    this.ts = ts;
   }
 
 

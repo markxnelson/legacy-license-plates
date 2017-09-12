@@ -13,6 +13,7 @@ package com.oracle.services.impl;
 import com.oracle.model.Plate;
 import com.oracle.services.LicensePlateService;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -52,6 +53,7 @@ public class LicensePlateServiceImpl implements LicensePlateService {
   public Plate addPlate(Plate plate) {
     try {
       utx.begin();
+      plate.setTs( new SimpleDateFormat("yyyy.MM.dd - HH.mm.ss").format(new Date()));
       em.persist(plate);
       utx.commit();
       return plate;

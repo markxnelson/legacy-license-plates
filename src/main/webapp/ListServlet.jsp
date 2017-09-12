@@ -23,6 +23,7 @@
           <td>Owner</td>
           <td>Address</td>
           <td>Image URL</td>
+          <td>Timestamp</td>
         </tr>
       </thead>
       <tbody>
@@ -42,6 +43,9 @@
             </td>
             <td>
               ${plate.imageURL}
+            </td>
+            <td>
+              ${plate.ts}
             </td>
           </tr>
         </c:forEach>

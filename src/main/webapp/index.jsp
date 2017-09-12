@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <c:url value="/res/styles.css" var="stylesURL"/>
     <link rel="stylesheet" href="${stylesURL}" type="text/css"> 
-    <title>Auctions</title>
+    <title>License Plates</title>
   </head>
   <body>
     <jsp:include page="/templates/header.jsp"/>
@@ -43,6 +43,6 @@
 
     <li>InetAddress: <%=serverAddress %>
     <li>InetAddress.hostname: <%=hostname %>
-      
+
   </body>
 </html>

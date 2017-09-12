@@ -19,7 +19,8 @@ CREATE TABLE Plate (
     PlateNumber VARCHAR(10),
     Owner VARCHAR(100),
     Address VARCHAR(1000),
-    ImageURL VARCHAR(1000)
+    ImageURL VARCHAR(1000),
+    TS VARCHAR(32)
 );
 
 create sequence plateid_sequence start with 1;

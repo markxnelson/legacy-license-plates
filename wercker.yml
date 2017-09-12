@@ -9,11 +9,19 @@ box:
 build:
   steps:
     - script:
-        name: echo
-        code: |
-          echo "hello from echo step"
-          echo "by now a domain should have been created"
-    - markxnelson/weblogic-step@0.1.21:
+       name: "Create Application war" 
+       code: | 
+         echo "Check for Maven repo access"      
+         status="$(curl --max-time 5 -Is https://repo.maven.apache.org | head -1)"
+         validate=( $status )
+         if [ "${validate[1]}" == "200" ]; then
+           cd $WERCKER_SOURCE_DIR
+           mvn clean install
+         else
+           echo "No internet access. Will use the prebuilt war"
+         fi 
+         cp target/licenseplates.war /u01/oracle/.
+    - markxnelson/weblogic-step@0.1.24:
         config: weblogic-config.json
     - internal/docker-push:
         username: $QUAY_IO_USERNAME

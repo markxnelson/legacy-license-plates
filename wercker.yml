@@ -24,6 +24,11 @@ build:
          cp target/licenseplates.war /u01/oracle/.
     - markxnelson/weblogic-step@0.1.24:
         config: weblogic-config.json
+    - script:
+        name: "Copy the DDL statements into place"
+        code: |
+          cp $WERCKER_SOURCE_DIR/create-user.sql /u01/oracle/create-user.sql
+          cp $WERCKER_SOURCE_DIR/create-schema.sql /u01/oracle/create-schema.sql
     - internal/docker-push:
         username: $QUAY_IO_USERNAME
         password: $QUAY_IO_PASSWORD

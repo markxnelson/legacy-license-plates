@@ -7,7 +7,7 @@
   ],
   "datasources": [
     {
-      "name": "licenseplates",
+      "name": "licenseplatesDB",
       "jndiName": "jdbc/licenseplates",
       "url": "jdbc:oracle:thin:@//database:1521/OraDoc.my.domain.com",
       "user": "c##mark",

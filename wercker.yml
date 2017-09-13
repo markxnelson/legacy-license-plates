@@ -12,11 +12,12 @@ build:
        name: "Create Application war" 
        code: | 
          echo "Check for Maven repo access"      
+         MVN=/u01/oracle/apache-maven-3.5.0/bin/mvn
          status="$(curl --max-time 5 -Is https://repo.maven.apache.org | head -1)"
          validate=( $status )
          if [ "${validate[1]}" == "200" ]; then
            cd $WERCKER_SOURCE_DIR
-           mvn clean install
+           $MVN clean install
          else
            echo "No internet access. Will use the prebuilt war"
          fi 

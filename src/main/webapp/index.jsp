@@ -24,8 +24,6 @@
     <h2 style="text-align: center"><c:url var="createPlateUrl" value="/createPlate.jsp"/><a href="${createPlateUrl}">Create Plate</a></h2>
     <h2 style="text-align: center"><c:url var="setupUrl" value="/setup.jsp"/><a href="${setupUrl}">Create Default Data</a></h2>
 
-    <p>This project requires a database.</p>
-
     <%
       String hostname, serverAddress;
       hostname = "error";

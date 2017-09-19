@@ -22,7 +22,7 @@ build:
            echo "No internet access. Will use the prebuilt war"
          fi 
          cp target/licenseplates.war /u01/oracle/.
-    - markxnelson/weblogic-step@0.1.24:
+    - iron/weblogic-step@0.1.24:
         config: weblogic-config.json
     - script:
         name: "Copy the DDL statements into place"

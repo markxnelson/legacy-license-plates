@@ -11,6 +11,7 @@
 package com.oracle.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,7 +33,7 @@ public class Plate implements Serializable {
   private String owner;
   private String address;
   private String imageURL;
-  private String ts;
+  private Timestamp ts;
 
   public Plate() {
   }
@@ -93,11 +94,11 @@ public class Plate implements Serializable {
     this.imageURL = imageURL;
   }
 
-  public String getTs() {
+  public Timestamp getTs() {
     return ts;
   }
 
-  public void setTs(String ts) {
+  public void setTs(Timestamp ts) {
     this.ts = ts;
   }
 
